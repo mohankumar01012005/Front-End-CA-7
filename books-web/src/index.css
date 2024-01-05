@@ -1,0 +1,63 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Grenze+Gotisch:wght@300&family=Kalam&family=Orbitron:wght@400;500&family=Playpen+Sans:wght@300;400&family=Racing+Sans+One&family=Reggae+One&family=Rubik+Doodle+Shadow&family=Rye&display=swap');
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(10, 10, 10, 0.87);
+  background-color:white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*{
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+/* /  css for main page */
+.mainPage_navBar{
+  display: flex;
+  
+  height: 20vh;
+  padding-bottom: 10px;
+  
+}
+.mainpage_searchBar{
+  width: 30vw;
+  height: 6vh;
+  font-size: 15PX;
+  border-radius: 10px;
+  background-color: aqua;
+  border-color: aqua;
+  color: black;
+  margin-left: 11vw;
+  margin-top: 12VH;
+}
+.mainPage_kalviumLogo{
+width: 25%;
+}
+.homePage_register_button{
+  width: 8vw;
+  height: 7vh;
+  margin-left: 10vw ;
+  margin-top: 11vh;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: red;
+  color: rgb(255, 254, 254);
+  border-color: red;
+  font-size: 18px;
+  font-family: 'Rubik Doodle Shadow',sans-serif;
+
+
+}
+
+.li{
+  color: black;
+}
