@@ -1,0 +1,47 @@
+.hame_text_phrases{
+  font-size: 20px;
+  margin-top: 30vh;
+  width: 100%;
+  margin-right: 30px;
+  font-family: 'Lemon',sans-serif;
+}
+.home_page_mainDiv{
+  background-color: pink;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.whole_booksDiv{
+  margin-top: 10vh;
+}
+
+.mainPage_navBar{
+  width: 100vw;
+  height: 20vh;
+}
+
+
+.homePage_register_button{
+  width: 10vw;
+  margin-left: 50vw;
+  text-decoration: none;
+  padding-top: 7px;
+  letter-spacing: 2px;
+  padding-left: 3px;
+  
+  height: 7vh;
+  margin-top: 45vh;
+
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: red;
+  color: rgb(255, 254, 254);
+  border-color: red;
+  font-size: 18px;
+  font-family: 'Rubik Doodle Shadow',sans-serif;
+
+
+}

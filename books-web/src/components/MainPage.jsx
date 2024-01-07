@@ -33,9 +33,11 @@ function MainPage() {
     fetchData();
   }, []);
 
-  const calculateAverageRating = (ratingsCount, averageRating) => {
-    if (ratingsCount > 0) {
-      return (averageRating / ratingsCount).toFixed(2);
+  const calculateAverageRating = (book) => {
+    const { ratingsCount, averageRating } = book;
+    if (ratingsCount && averageRating) {
+      const average = (averageRating / ratingsCount).toFixed(2);
+      return isNaN(average) ? 'N/A' : average;
     }
     return 'N/A';
   };
@@ -63,7 +65,7 @@ function MainPage() {
 
   return (
     <div>
-      <nav className='mainPage_navBar'>
+      <nav className='top_div'>
         <img className='mainPage_kalviumLogo' src={images} alt='Logo' />
         <input
           className='mainpage_searchBar'
@@ -72,37 +74,36 @@ function MainPage() {
           value={searchQuery}
           onChange={handleSearch}
         />
-        <button className='homePage_register_button' onClick={handleLogout}>
+        <button className='mainPage_Logout_btn' onClick={handleLogout}>
           Logout
         </button>
-        <button className='homePage_home_button' onClick={handleHome}>
+        <button className='home_button' onClick={handleHome}>
           Home
         </button>
       </nav>
 
       <div>
-        <h2>Book List</h2>
+        <h2 className='booklist'>Book List</h2>
         {isNotFound ? (
           <p style={{ textAlign: 'center', color: 'red' }}>
             Book Not Found. Please Enter a Valid Name.
           </p>
         ) : (
-          <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+          <div className='whole_booksDiv' style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
             {filteredBooks.map((book) => (
-              <li key={book.id} className='li'>
+              <div key={book.id} className='li'>
                 <img src={book.imageLinks.thumbnail} alt={book.title} />
                 <div>
                   <h4>{book.title}</h4>
                   <p>Author: {book.authors.join(', ')}</p>
                   <p>
-                    Average Rating:{' '}
-                    {calculateAverageRating(book.ratingsCount, book.averageRating)}
+                    Average Rating: {calculateAverageRating(book)}
                   </p>
                   <p>Price: Free</p>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

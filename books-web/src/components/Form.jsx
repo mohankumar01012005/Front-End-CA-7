@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for React Router v6
+import { useNavigate } from 'react-router-dom';
 import './Form.css';
 
 export default function RegistrationForm() {
@@ -20,7 +20,7 @@ export default function RegistrationForm() {
   const formSubmitHandler = (data) => {
     if (Object.keys(errors).length === 0) {
       toast.success('Registration Successful', {
-        position: 'top-right',
+        position: 'top-left',
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -28,13 +28,12 @@ export default function RegistrationForm() {
         draggable: true,
       });
 
-      // Set form submission status to true
+      localStorage.setItem('userData', JSON.stringify(data));
+
       setIsFormSubmitted(true);
     } else {
-      // Set form submission status to false
       setIsFormSubmitted(false);
 
-      // Check for specific errors and show corresponding messages
       if (errors.firstName) {
         toast.error('Error: Enter your first name', {
           position: 'top-right',
@@ -45,73 +44,32 @@ export default function RegistrationForm() {
           draggable: true,
         });
       }
-      if (errors.lastName) {
-        toast.error('Error: Enter your last name', {
-          position: 'top-right',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-      if (errors.email) {
-        toast.error('Error: Enter a valid email', {
-          position: 'top-right',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-      if (errors.password) {
-        if (errors.password.type === 'passwordMismatch') {
-          toast.error('Error: Passwords do not match', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-        } else {
-          toast.error('Error: Enter a valid password', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-        }
-      }
     }
 
     console.log('data:', data);
   };
 
   const handleExploreBooks = () => {
-    // Redirect to the main page when Explore Books button is clicked
     navigate('/MainPage');
   };
 
   return (
-    <div className='form-container'>
+    <div className={`form-container ${isFormSubmitted ? 'submitted' : ''}`}>
       <ToastContainer />
 
       <fieldset>
-        <legend>Fill this form</legend>
+        <legend>Register to Explore the Books</legend>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {isSubmitSuccessful && (
-            <div className='success'>
-              <p>Registration Successful</p>
-              {/* Show Explore Books button when the form is submitted successfully */}
-              <button onClick={handleExploreBooks}>Explore Books</button>
+            <div className={`success ${isFormSubmitted ? 'submitted' : ''}`}>
+              <p className='suuccess_msg'>Registration Successful. Now click on the explore Books Button 👉</p>
+              <button className='exploreBooks_btn' onClick={handleExploreBooks}>
+                Explore Books
+              </button>
             </div>
           )}
 
-          <label style={{ color: 'black' }}>First Name:</label>
+          <label style={{ color: 'white' }}>First Name:</label>
           <input
             type='text'
             name='firstName'
@@ -122,10 +80,11 @@ export default function RegistrationForm() {
                 message: 'Minimum four characters required',
               },
             })}
+            className={!isFormSubmitted ? '' : 'input-success'}
           />
           {errors.firstName && <p className='err'>{errors.firstName.message}</p>}
 
-          <label style={{ color: 'black' }}>Last Name:</label>
+          <label style={{ color: 'white' }}>Last Name:</label>
           <input
             type='text'
             name='lastName'
@@ -136,10 +95,11 @@ export default function RegistrationForm() {
                 message: 'Minimum 4 characters are required.',
               },
             })}
+            className={!isFormSubmitted ? '' : 'input-success'}
           />
           {errors.lastName && <p className='err'>{errors.lastName.message}</p>}
 
-          <label style={{ color: 'black' }}>Email:</label>
+          <label style={{ color: 'white' }}>Email:</label>
           <input
             type='email'
             name='email'
@@ -150,24 +110,30 @@ export default function RegistrationForm() {
                 message: 'Type valid email',
               },
             })}
+            className={!isFormSubmitted ? '' : 'input-success'}
           />
           {errors.email && <p className='err'>{errors.email.message}</p>}
 
-          <label style={{ color: 'black' }}>Password:</label>
+          <label style={{ color: 'white' }}>Password:</label>
           <input
             type='password'
             name='password'
             {...register('password', {
               required: 'Enter password',
-              maxLength: {
-                value: 4,
-                message: 'Maximum four characters are required',
+              minLength: {
+                value: 8,
+                message: 'Minimum eight characters, including at least one special character, are required',
+              },
+              pattern: {
+                value: /^(?=.*[!@#$%^&*])/, // at least one special character
+                message: 'Password must contain at least one special character',
               },
             })}
+            className={!isFormSubmitted ? '' : 'input-success'}
           />
           {errors.password && <p className='err'>{errors.password.message}</p>}
 
-          <label style={{ color: 'black' }}>Confirm Password:</label>
+          <label style={{ color: 'white' }}>Confirm Password:</label>
           <input
             type='password'
             name='confirmPassword'
@@ -175,14 +141,16 @@ export default function RegistrationForm() {
               validate: (value) =>
                 value === watch('password') || 'Passwords do not match',
             })}
+            className={!isFormSubmitted ? '' : 'input-success'}
           />
           {errors.confirmPassword && (
             <p className='err'>{errors.confirmPassword.message}</p>
           )}
 
-          <input type='submit' value={'Register'} />
+          <input className='registerButton' type='submit' value={'Register'} />
 
           <button
+            className='reset_button'
             onClick={() => {
               reset();
             }}

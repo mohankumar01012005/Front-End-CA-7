@@ -1,12 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Lato:ital,wght@0,300;0,400;1,100;1,300&family=Lemon&family=Permanent+Marker&family=Rubik+Doodle+Shadow&family=Russo+One&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: white;
+  background-color: rgb(150, 166, 166);
+  background-size: 100% 100vw;
+  background-repeat: no-repeat;
   text-align: center;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: azure;
   box-shadow: 1px 4px grey;
 }
 
@@ -25,12 +34,33 @@ body {
 
 .form-container {
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
-  background-color: #fff;
   padding: 2rem;
   margin: 2rem auto;
-  width: 50%;
+  background-color: black;
+  width: 40vw;
+}
+
+.submitted {
+  height: auto;
+}
+
+.form-container.submitted {
+  width: 40%;
+}
+
+.input-success {
+  width: calc(100% - 18px);
+}
+
+.success.submitted {
+  background-color: #357bf7;
+  color: white;
+  margin: auto;
+  width: 40vw;
+  text-align: center;
 }
 
 form {
@@ -43,17 +73,18 @@ legend {
   background-color: #242424;
   color: white;
   padding: 3px;
+  margin-bottom: 10px;
 }
 
 form input {
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  background-color: #eee;
+  color: white;
   border: 1px solid white;
 }
 
 form input[type="submit"] {
-  background-color: #41A445;
+  background-color: #41a445;
   color: white;
   margin-top: 1rem;
   font-weight: 500;
@@ -74,14 +105,56 @@ form label {
   font-size: 0.9rem;
 }
 
-.success {
-  background-color: #357BF7;
+input {
   color: white;
+}
+
+.lable_firstName {
+  color: white;
+}
+
+.lable_lastName {
+  color: white;
+}
+
+.exploreBooks_btn {
+  width: 12vw;
+  margin-top: -10vh;
+  margin-left: 50vw;
+  height: 7vh;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: red;
+  color: rgb(255, 254, 254);
+  border-color: red;
+  font-size: 15px;
+  font-family: 'Rubik Doodle Shadow', sans-serif;
+}
+
+.suuccess_msg {
+  background-color: #357bf7;
+  font-size: 20px;
+  padding: 18px;
   margin: auto;
-  width: 600px;
+  width: 40vw;
   text-align: center;
 }
 
-input {
-  color: black;
+.reset_button {
+  width: 10vw;
+  margin: auto;
+  height: 7vh;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.registerButton {
+  width: 10vw;
+  margin: auto;
+  height: 7vh;
+  font-size: 20px;
+  border-radius: 10px;
 }
